@@ -1,0 +1,196 @@
+/* ------------- Global & Animated Background ------------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Chewy', cursive;               /* Subway-Surfers style font */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Static background image underlay */
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('https://img.notionusercontent.com/s3/prod-files-secure%2F16355722-4df3-4a9d-ad83-693d60d9bceb%2F95d16e42-4df7-482f-b1c1-f991566c3d00%2Fimage.png/size/w=2000?exp=1746114961&sig=G4zgfVx_I9l8N2m8PoW3Xu7k5rFH1TX3aNxuw2Wt0To&id=19a8a5e9-4b97-80f3-b1ec-c6b74d041818&table=block')
+    no-repeat center/cover;
+  z-index: -2;
+}
+
+/* Animated gradient overlay for subtle movement */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg,
+    rgba(180,0,255,0.1) 0%,
+    rgba(0,255,255,0.1) 50%,
+    rgba(180,0,255,0.1) 100%);
+  animation: bgShift 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes bgShift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ------------- Main Container & Typography ------------- */
+.app-container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  font-family: 'Chewy', cursive;
+  font-size: 2.2rem;
+  color: #e0b3ff;
+  text-shadow: 0 0 8px #b400ff, 0 0 16px #8000ff;
+  margin-bottom: 1rem;
+}
+
+/* ------------- Score Display ------------- */
+.score {
+  font-family: 'Chewy', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #e0b3ff;
+  text-shadow: 0 0 8px #b400ff, 0 0 16px #8000ff;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #b400ff; }
+  to   { text-shadow: 0 0 20px #b400ff; }
+}
+
+/* ------------- Blend Me Button ------------- */
+.blend-button {
+  width: 160px;
+  height: 160px;
+  border: 20px solid transparent;
+  border-image: url('https://img.notionusercontent.com/s3/prod-files-secure%2F16355722-4df3-4a9d-ad83-693d60d9bceb%2Fe7b356fd-e01b-42e7-800a-45cff7bdeb86%2F1.png/size/w=2000?exp=1746114921&sig=WbmWM-DJeKgOUUOSon-weEZQq71rXAr3xZQYeX7T-so&id=19e8a5e9-4b97-80a3-8e9d-ede7f2b6f757&table=block') 30 round;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-family: 'Chewy', cursive;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px #b400ff;
+  margin: 1rem auto;
+  transition: box-shadow 0.3s;
+}
+.blend-button:hover {
+  box-shadow: 0 0 30px #b400ff;
+}
+
+/* ------------- Shop & Wallet Buttons ------------- */
+.shop-button,
+.wallet-button {
+  font-family: 'Chewy', cursive;
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  margin: 0.3rem;
+  background: #1f0030;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0 6px #b400ff;
+  cursor: pointer;
+}
+
+/* ------------- High Score & Footer ------------- */
+.high-score-box {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(48, 0, 79, 0.8);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #b400ff;
+  font-family: 'Chewy', cursive;
+  font-weight: bold;
+  z-index: 100;
+}
+
+.footer-credit {
+  position: fixed;
+  bottom: 0.5rem;
+  right: 1rem;
+  font-family: 'Chewy', cursive;
+  font-size: 0.9rem;
+  color: #ccc;
+  z-index: 100;
+}
+.footer-credit a {
+  color: #e0b3ff;
+  text-decoration: none;
+}
+.footer-credit a:hover {
+  text-decoration: underline;
+}
+
+/* ------------- Quiz Modal ------------- */
+.quiz-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.quiz-box {
+  background: #1f0030;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 0 20px #b400ff;
+  text-align: left;
+  font-family: 'Chewy', cursive;
+}
+
+.quiz-question {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-options button {
+  width: 100%;
+  margin: 0.4rem 0;
+  padding: 0.6rem;
+  background: #30004f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Chewy', cursive;
+}
+.quiz-options button:hover {
+  background: #45006f;
+}
+
+.quiz-footer {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+}
+.quiz-footer a {
+  color: #e0b3ff;
+}
